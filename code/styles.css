@@ -1,6 +1,8 @@
 body {
   font-family: 'PingFang SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1e272e;
+
+  background-size: cover;
+  background-position: center;
   color: #ecf0f1;
   display: flex;
   flex-direction: column;
@@ -8,6 +10,19 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
+  backdrop-filter: blur(1px); /* 添加高斯模糊效果 */
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./IMG/image.png'); /* 背景图片路径 */
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* 确保背景在内容后面 */
 }
 
 h1 {
@@ -15,15 +30,21 @@ h1 {
   font-size: 1.5rem;
   font-weight: 400;
   color: #afafaf;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.77);
 }
 
 .container {
-  background-color: #2d3a47;
+  background: linear-gradient(
+    to left,
+    rgba(62, 52, 94, 0.719),
+    rgba(32, 39, 58, 0.719)
+  );
+  backdrop-filter: blur(17px);
   padding: 30px;
   padding-right: 70px;
   padding-left: 70px;
   border-radius: 17px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.31);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.51);
   text-align: center;
   width: 100%;
   max-width: 700px;
@@ -31,6 +52,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .button {
@@ -46,6 +68,7 @@ h1 {
   margin-right: 10px;
   border-radius: 17px;
   cursor: pointer;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.514);
   transition: background-color 0.3s, transform 0.3s ease-in-out;
 }
 
@@ -60,6 +83,7 @@ h1 {
   margin: 10px 0;
   border-radius: 5px;
   cursor: pointer;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.514);
   transition: background-color 0.3s, transform 0.3s ease-in-out;
   background-color: #3b6d5e;
 }
@@ -70,6 +94,7 @@ h1 {
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.514);
   display: inline-block;
   font-size: 16px;
   margin: 10px 0;
@@ -91,6 +116,7 @@ h1 {
 }
 
 input[type=range] {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.314);
   width: 60%; /* 调整滑动条宽度，使其和按钮更好地对齐 */
   margin: 20px 10px; /* 调整滑动条左右间距 */
   -webkit-appearance: none;
@@ -131,4 +157,5 @@ label {
   margin-top: 5px;
   font-size: 1.0rem;
   color: #9c9c9c;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.77);
 }
