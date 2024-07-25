@@ -1,0 +1,8 @@
+.env*
+**/.env
+.env
+.zip
+.zip*
+*.zip
+.psd*
+*.psd
