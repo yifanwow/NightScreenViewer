@@ -1,6 +1,7 @@
 body {
   font-family: 'PingFang SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+  background-color: #1e272e;
+  background-image: url('./IMG/image.png');
   background-size: cover;
   background-position: center;
   color: #ecf0f1;
@@ -10,41 +11,26 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
-  backdrop-filter: blur(1px); /* 添加高斯模糊效果 */
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('./IMG/image.png'); /* 背景图片路径 */
-  background-size: cover;
-  background-position: center;
-  z-index: -1; /* 确保背景在内容后面 */
 }
 
 h1 {
   margin-bottom: 20px;
   font-size: 1.5rem;
   font-weight: 400;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
   color: #afafaf;
-  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.77);
 }
 
 .container {
   background: linear-gradient(
     to left,
-    rgba(62, 52, 94, 0.719),
-    rgba(32, 39, 58, 0.719)
+    rgba(62, 52, 94, 0.5),
+    rgba(32, 39, 58, 0.5)
   );
-  backdrop-filter: blur(17px);
+  backdrop-filter: blur(10px);
   padding: 30px;
-  padding-right: 70px;
-  padding-left: 70px;
   border-radius: 17px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.51);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.31);
   text-align: center;
   width: 100%;
   max-width: 700px;
@@ -52,12 +38,66 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
 
+.toggle-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+  margin: 0 10px;
+  box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.314);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #7c7c7c;
+  transition: .4s;
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 5px;
+  bottom: 4px;
+  box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.314);
+  background-color: rgb(192, 192, 192);
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #563dc4;
+}
+
+input:checked + .slider:before {
+  transform: translateX(27px);
 }
 
 .button {
   border: none;
-  color: rgb(216, 216, 216);
+  color: rgb(196, 196, 196);
   background-color: #585858;
   padding: 10px 10px;
   text-align: center;
@@ -67,41 +107,22 @@ h1 {
   margin-left: 10px;
   margin-right: 10px;
   border-radius: 17px;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
+  box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.314);
   cursor: pointer;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.514);
   transition: background-color 0.3s, transform 0.3s ease-in-out;
 }
 
 .button-on {
-  border: none;
-  color: rgb(196, 196, 196);
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px 0;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.514);
-  transition: background-color 0.3s, transform 0.3s ease-in-out;
   background-color: #3b6d5e;
+  font-size: 1.0rem;
+  font-weight: 200;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }
 
 .button-off {
-  border: none;
-  color: rgb(196, 196, 196);
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.514);
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px 0;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s ease-in-out;
   background-color: #684b47;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }
 
 .button:hover {
@@ -116,9 +137,8 @@ h1 {
 }
 
 input[type=range] {
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.314);
-  width: 60%; /* 调整滑动条宽度，使其和按钮更好地对齐 */
-  margin: 20px 10px; /* 调整滑动条左右间距 */
+  width: 60%;
+  margin: 20px 10px;
   -webkit-appearance: none;
   appearance: none;
   height: 8px;
@@ -157,5 +177,5 @@ label {
   margin-top: 5px;
   font-size: 1.0rem;
   color: #9c9c9c;
-  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.77);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }

@@ -1,12 +1,33 @@
 {
-  "name": "code",
+  "name": "nightscreenviewer",
   "version": "1.0.0",
   "description": "A simple Electron app for NightScreenViewer",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.yourdomain.nightscreenviewer",
+    "files": [
+      "src/**/*",
+      "main.js",
+      "menu.js",
+      "preload.js",
+      "backend/build/**/*"
+    ],
+    "extraResources": {
+      "from": "backend/build",
+      "to": "build"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/IMG/logo/logo2.ico"
+    }
   },
   "devDependencies": {
-    "electron": "^latest-version"
+    "electron": "latest",
+    "electron-builder": "latest",
+    "node-ipc": "latest"
   }
 }

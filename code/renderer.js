@@ -4,7 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
   app.innerHTML = `
     <div class="container">
       <h1>Night Screen Viewer</h1>
-      <button id="autoOn" class="button button-on">Auto On</button>
+      <div class="toggle-container">
+        <label class="switch">
+          <input type="checkbox" id="toggle">
+          <span class="slider round"></span>
+        </label>
+        <button id="autoOn" class="button button-on">Auto On</button>
+      </div>
       <div class="input-container">
         <button id="decrease" class="button">-</button>
         <input type="range" id="opacity" min="0" max="100" value="50">
@@ -49,5 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newValue > 100) newValue = 100;
     opacitySlider.value = newValue;
     opacitySlider.oninput();
+  });
+
+  document.getElementById('toggle').addEventListener('change', function() {
+    const isChecked = this.checked;
+    window.electron.sendMessage(isChecked ? 'startBlackScreen' : 'stopBlackScreen');
+  });
+
+  window.electron.receiveMessage((data) => {
+    console.log('Message from backend:', data);
   });
 });

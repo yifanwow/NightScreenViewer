@@ -1,0 +1,15 @@
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\bin\Debug\net7.0\NightScreenViewerBackend.exe
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\bin\Debug\net7.0\NightScreenViewerBackend.deps.json
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\bin\Debug\net7.0\NightScreenViewerBackend.runtimeconfig.json
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\bin\Debug\net7.0\NightScreenViewerBackend.dll
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\bin\Debug\net7.0\NightScreenViewerBackend.pdb
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.csproj.AssemblyReference.cache
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.GeneratedMSBuildEditorConfig.editorconfig
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.AssemblyInfoInputs.cache
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.AssemblyInfo.cs
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.csproj.CoreCompileInputs.cache
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.dll
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\refint\NightScreenViewerBackend.dll
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.pdb
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\NightScreenViewerBackend.genruntimeconfig.cache
+F:\Program\Github-Project-Local\NightScreenViewer\NightScreenViewer\backend\NightScreenViewerBackend\obj\Debug\net7.0\ref\NightScreenViewerBackend.dll
