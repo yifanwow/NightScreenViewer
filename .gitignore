@@ -6,3 +6,6 @@
 *.zip
 .psd*
 *.psd
+node_modules/
+code/node_modules/
+code/node_modules
