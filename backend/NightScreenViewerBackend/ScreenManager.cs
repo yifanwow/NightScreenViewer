@@ -7,38 +7,43 @@ namespace NightScreenViewerBackend
 {
     public class ScreenManager
     {
-        private Form[] blackScreenForms; // 存储黑屏窗体的数组
-        private SynchronizationContext mainContext; // 同步上下文，用于在主线程上执行代码
+        private static Form[]? blackScreenForms; // 声明为nullable类型
+        private SynchronizationContext? mainContext; // 声明为nullable类型
 
         public ScreenManager()
         {
             mainContext = SynchronizationContext.Current; // 获取当前同步上下文
         }
 
-        // 启动黑屏功能
         public string StartBlackScreen()
         {
-            var screens = Screen.AllScreens; // 获取所有屏幕
-            var mainScreen = Screen.PrimaryScreen; // 获取主屏幕
-            var nonPrimaryScreens = ScreenHelper.GetNonPrimaryScreens(screens, mainScreen); // 获取非主屏幕
+            var screens = Screen.AllScreens;
+            var mainScreen =
+                Screen.PrimaryScreen
+                ?? throw new InvalidOperationException("Primary screen not found."); // 确保mainScreen不为null
+            var nonPrimaryScreens = ScreenHelper.GetNonPrimaryScreens(screens, mainScreen);
 
-            blackScreenForms = new Form[nonPrimaryScreens.Length]; // 初始化黑屏窗体数组
+            blackScreenForms = new Form[nonPrimaryScreens.Length];
             for (int i = 0; i < nonPrimaryScreens.Length; i++)
             {
-                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(nonPrimaryScreens[i], 0.5); // 初始不透明度设置为0.5
-                ScreenHelper.ShowForm(blackScreenForms[i]); // 显示窗体
+                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(
+                    nonPrimaryScreens[i],
+                    0.5
+                ); // 初始不透明度设置为0.5
+                ScreenHelper.ShowForm(blackScreenForms[i]);
             }
 
-            // 淡入效果，增加不透明度到0.9
             foreach (var form in blackScreenForms)
             {
                 FadeEffect.FadeIn(form, 0.9); // 淡入到90%不透明度
             }
 
-            return "Black Screen started"; // 返回启动信息
+            // 启动焦点变化检测
+            StartFocusWatcher();
+
+            return "Black Screen started";
         }
 
-        // 停止黑屏功能
         public string StopBlackScreen()
         {
             if (blackScreenForms != null)
@@ -47,13 +52,15 @@ namespace NightScreenViewerBackend
                 {
                     FadeEffect.FadeOutAndClose(form); // 淡出并关闭窗体
                 }
-                blackScreenForms = null; // 清空黑屏窗体数组
+                blackScreenForms = null;
             }
 
-            return "Black Screen stopped"; // 返回停止信息
+            // 停止焦点变化检测
+            StopFocusWatcher();
+
+            return "Black Screen stopped";
         }
 
-        // 调整黑屏窗体的不透明度
         public string SetOpacity(double opacity)
         {
             if (blackScreenForms != null)
@@ -62,9 +69,69 @@ namespace NightScreenViewerBackend
                 {
                     FadeEffect.AdjustOpacity(form, opacity); // 调整不透明度
                 }
-                return $"Opacity adjusted to {opacity * 100}%"; // 返回调整后的不透明度信息
+                return $"Opacity adjusted to {opacity * 100}%";
             }
-            return "No black screens to adjust."; // 返回没有黑屏窗体的信息
+            return "No black screens to adjust.";
+        }
+
+        // 刷新黑屏窗体的置顶属性
+        public static void RefreshBlackScreenForms()
+        {
+            if (blackScreenForms != null)
+            {
+                foreach (var form in blackScreenForms)
+                {
+                    form.Invoke(
+                        new Action(() =>
+                        {
+                            form.TopMost = false;
+                            form.TopMost = true;
+                        })
+                    );
+                }
+                Console.WriteLine("Refreshed black screen forms.");
+            }
+        }
+
+        private Task? focusWatcherTask;
+        private CancellationTokenSource? focusWatcherCts;
+
+        private void StartFocusWatcher()
+        {
+            focusWatcherCts = new CancellationTokenSource();
+            var token = focusWatcherCts.Token;
+            focusWatcherTask = Task.Run(
+                async () =>
+                {
+                    while (!token.IsCancellationRequested)
+                    {
+                        await Task.Delay(3000); // 检测间隔，可以调整
+                        foreach (var form in blackScreenForms)
+                        {
+                            form.Invoke(
+                                new Action(() =>
+                                {
+                                    form.TopMost = false;
+                                })
+                            );
+                        }
+                        if (WindowHelper.IsForegroundWindowOnPrimaryScreen())
+                        {
+                            RefreshBlackScreenForms();
+                        }
+                    }
+                },
+                token
+            );
+        }
+
+        private void StopFocusWatcher()
+        {
+            if (focusWatcherCts != null)
+            {
+                focusWatcherCts.Cancel();
+                focusWatcherCts = null;
+            }
         }
     }
 }
