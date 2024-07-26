@@ -38,9 +38,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const opacitySlider = document.getElementById('opacity');
   const opacityValue = document.getElementById('opacityValue');
 
+  // 防抖函数
+  function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+
+  // 更新不透明度并发送消息的函数
+  const updateOpacity = debounce((value) => {
+    window.electron.sendMessage(`setOpacity:${value}`);
+  }, 520); // 0.52秒钟防抖时间
+
   opacitySlider.oninput = function() {
     opacityValue.textContent = `${this.value}%`;
-    window.electron.sendMessage(`setOpacity:${this.value}`);
+    updateOpacity(this.value); // 调用防抖函数
   };
 
   document.getElementById('decrease').addEventListener('click', () => {

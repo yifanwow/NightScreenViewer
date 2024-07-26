@@ -18,6 +18,7 @@ function createMenu(mainWindow) {
     {
       label: 'Exit',
       click: () => {
+        app.isQuiting = true;
         app.quit();
       }
     }

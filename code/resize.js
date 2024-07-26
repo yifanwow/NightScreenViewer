@@ -1,5 +1,5 @@
 function enforceAspectRatio(mainWindow) {
-  const aspectRatio = 500 / 700;
+  const aspectRatio = 500 / 750;
   mainWindow.on('will-resize', (event, newBounds) => {
     if (newBounds.width / newBounds.height !== aspectRatio) {
       event.preventDefault();
