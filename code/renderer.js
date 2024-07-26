@@ -75,6 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('toggle').addEventListener('change', function() {
     const isChecked = this.checked;
     window.electron.sendMessage(isChecked ? 'startBlackScreen' : 'stopBlackScreen');
+
+    // 当用户发送startBlackScreen后的一秒钟，同步发送一个更新不透明度的请求
+    if (isChecked) {
+      setTimeout(() => {
+        const currentOpacity = opacitySlider.value;
+        window.electron.sendMessage(`setOpacity:${currentOpacity}`);
+      }, 1000); // 一秒钟延时
+    }
   });
 
   window.electron.receiveMessage((data) => {

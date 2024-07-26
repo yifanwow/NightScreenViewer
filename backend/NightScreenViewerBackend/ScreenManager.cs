@@ -15,27 +15,17 @@ namespace NightScreenViewerBackend
             mainContext = SynchronizationContext.Current; // 获取当前同步上下文
         }
 
-        public string StartBlackScreen()
+        public async Task<string> StartBlackScreen()
         {
             var screens = Screen.AllScreens;
-            var mainScreen =
-                Screen.PrimaryScreen
-                ?? throw new InvalidOperationException("Primary screen not found."); // 确保mainScreen不为null
+            var mainScreen = Screen.PrimaryScreen ?? throw new InvalidOperationException("Primary screen not found."); // 确保mainScreen不为null
             var nonPrimaryScreens = ScreenHelper.GetNonPrimaryScreens(screens, mainScreen);
 
             blackScreenForms = new Form[nonPrimaryScreens.Length];
             for (int i = 0; i < nonPrimaryScreens.Length; i++)
             {
-                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(
-                    nonPrimaryScreens[i],
-                    0.5
-                ); // 初始不透明度设置为0.5
+                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(nonPrimaryScreens[i], 0.01); // 初始不透明度设置为0.1
                 ScreenHelper.ShowForm(blackScreenForms[i]);
-            }
-
-            foreach (var form in blackScreenForms)
-            {
-                FadeEffect.FadeIn(form, 0.9); // 淡入到90%不透明度
             }
 
             // 启动焦点变化检测

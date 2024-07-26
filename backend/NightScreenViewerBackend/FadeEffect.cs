@@ -7,15 +7,15 @@ namespace NightScreenViewerBackend
     public static class FadeEffect
     {
         // 淡入效果
-        public static async void FadeIn(Form form, double targetOpacity)
-        {
-            await Task.Delay(500); // 确保窗体可见
-            for (double opacity = form.Opacity; opacity <= targetOpacity; opacity += 0.05)
-            {
-                form.Invoke(new Action(() => form.Opacity = opacity)); // 更新窗体不透明度
-                await Task.Delay(50); // 等待50毫秒
-            }
-        }
+        // public static async void FadeIn(Form form, double targetOpacity)
+        // {
+        //     await Task.Delay(500); // 确保窗体可见
+        //     for (double opacity = form.Opacity; opacity <= targetOpacity; opacity += 0.05)
+        //     {
+        //         form.Invoke(new Action(() => form.Opacity = opacity)); // 更新窗体不透明度
+        //         await Task.Delay(50); // 等待50毫秒
+        //     }
+        // }
 
         // 淡出并关闭窗体
         public static async void FadeOutAndClose(Form form)
