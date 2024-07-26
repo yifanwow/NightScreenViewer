@@ -2,6 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Pipes;
+using System.IO;
 
 namespace NightScreenViewerBackend
 {
@@ -20,13 +22,18 @@ namespace NightScreenViewerBackend
         public async Task<string> StartBlackScreen()
         {
             var screens = Screen.AllScreens;
-            var mainScreen = Screen.PrimaryScreen ?? throw new InvalidOperationException("Primary screen not found."); // 确保mainScreen不为null
+            var mainScreen =
+                Screen.PrimaryScreen
+                ?? throw new InvalidOperationException("Primary screen not found."); // 确保mainScreen不为null
             var nonPrimaryScreens = ScreenHelper.GetNonPrimaryScreens(screens, mainScreen);
 
             blackScreenForms = new Form[nonPrimaryScreens.Length];
             for (int i = 0; i < nonPrimaryScreens.Length; i++)
             {
-                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(nonPrimaryScreens[i], 0.01); // 初始不透明度设置为0.01
+                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(
+                    nonPrimaryScreens[i],
+                    0.01
+                ); // 初始不透明度设置为0.01
                 ScreenHelper.ShowForm(blackScreenForms[i]);
             }
 
@@ -145,8 +152,14 @@ namespace NightScreenViewerBackend
             {
                 isAutoModeEnabled = true;
                 FullscreenDetector.StartDetection(
-                    () => { Console.WriteLine("full screen."); },
-                    () =>  { Console.WriteLine("exit full screen."); }
+                    () =>
+                    {
+                        Console.WriteLine("fullscreen.");
+                    },
+                    () =>
+                    {
+                        Console.WriteLine("exitfullscreen.");
+                    }
                 );
                 Console.WriteLine("Auto mode enabled.");
             }
@@ -162,5 +175,7 @@ namespace NightScreenViewerBackend
                 Console.WriteLine("Auto mode disabled.");
             }
         }
+
+        
     }
 }

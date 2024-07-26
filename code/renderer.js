@@ -86,6 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   window.electron.receiveMessage((data) => {
-    console.log('Message from backend:', data);
+    console.log('Message from REC:', data);
+    const toggle = document.getElementById('toggle');
+    if (data === 'fullscreen.') {
+      toggle.checked = true;
+      toggle.dispatchEvent(new Event('change'));
+    } else if (data === 'exitfullscreen.') {
+      toggle.checked = false;
+      toggle.dispatchEvent(new Event('change'));
+    }
   });
 });

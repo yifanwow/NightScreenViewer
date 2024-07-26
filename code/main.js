@@ -56,8 +56,10 @@ function createWindow() {
   const backendProcess = spawn('dotnet', ['run', '--project', backendPath]);
 
   backendProcess.stdout.on('data', (data) => {
-    console.log(`Backend: ${data}`);
-    mainWindow.webContents.send('backend-message', data.toString());
+    console.log(`Backend stdout: ${data}`); // 输出原始数据
+    const messageToSend = data.toString().trim();
+    console.log(`Sending message to frontend: '${messageToSend}'`); // 明确显示发送的消息
+    mainWindow.webContents.send('backend-message', messageToSend);
   });
 
   backendProcess.stderr.on('data', (data) => {
