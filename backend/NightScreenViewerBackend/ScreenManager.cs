@@ -1,6 +1,4 @@
 using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,13 +19,18 @@ namespace NightScreenViewerBackend
         {
             var screens = Screen.AllScreens;
             var mainScreen = Screen.PrimaryScreen;
-            var nonPrimaryScreens = Array.FindAll(screens, s => s != mainScreen);
+            var nonPrimaryScreens = ScreenHelper.GetNonPrimaryScreens(screens, mainScreen);
 
             blackScreenForms = new Form[nonPrimaryScreens.Length];
             for (int i = 0; i < nonPrimaryScreens.Length; i++)
             {
-                blackScreenForms[i] = CreateBlackScreenForm(nonPrimaryScreens[i], 0.9); // 90% 不透明度
-                ShowForm(blackScreenForms[i]);
+                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(nonPrimaryScreens[i], 0.5); // Initial opacity is set to 0.5
+                ScreenHelper.ShowForm(blackScreenForms[i]);
+            }
+
+            foreach (var form in blackScreenForms)
+            {
+                FadeEffect.FadeIn(form, 0.9); // Fade to 90% opacity
             }
 
             return "Black Screen started";
@@ -37,76 +40,27 @@ namespace NightScreenViewerBackend
         {
             if (blackScreenForms != null)
             {
-                for (int i = 0; i < blackScreenForms.Length; i++)
+                foreach (var form in blackScreenForms)
                 {
-                    CloseForm(blackScreenForms[i]);
+                    FadeEffect.FadeOutAndClose(form);
                 }
-                blackScreenForms = null; // 清空数组引用，防止复用
+                blackScreenForms = null;
             }
 
             return "Black Screen stopped";
         }
 
-        private Form CreateBlackScreenForm(Screen screen, double opacity)
+        public string SetOpacity(double opacity)
         {
-            var form = new Form
+            if (blackScreenForms != null)
             {
-                FormBorderStyle = FormBorderStyle.None,
-                Bounds = screen.Bounds,
-                BackColor = Color.Black,
-                Opacity = opacity, // 90% 不透明度
-                StartPosition = FormStartPosition.Manual,
-                ShowInTaskbar = false,
-                TopMost = true
-            };
-
-            form.Load += (sender, e) =>
-            {
-                SetWindowLong(form.Handle, GWL_EXSTYLE, GetWindowLong(form.Handle, GWL_EXSTYLE) | WS_EX_LAYERED);
-                byte opacityByte = (byte)(opacity * 255); // 将不透明度转换为字节值
-                SetLayeredWindowAttributes(form.Handle, 0, opacityByte, LWA_ALPHA);
-            };
-
-            return form;
-        }
-
-        private void ShowForm(Form form)
-        {
-            var thread = new Thread(() =>
-            {
-                mainContext = SynchronizationContext.Current;
-                Application.Run(form);
-            });
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-        }
-
-        private void CloseForm(Form form)
-        {
-            if (form.InvokeRequired)
-            {
-                form.Invoke(new Action(() => form.Close()));
+                foreach (var form in blackScreenForms)
+                {
+                    FadeEffect.AdjustOpacity(form, opacity);
+                }
+                return $"Opacity adjusted to {opacity * 100}%";
             }
-            else
-            {
-                form.Close();
-            }
-
-            form.Dispose();
-            Console.WriteLine("Closed form on screen: " + form.Bounds);
+            return "No black screens to adjust.";
         }
-
-        private const int GWL_EXSTYLE = -20;
-        private const int WS_EX_LAYERED = 0x80000;
-        private const int LWA_ALPHA = 0x2;
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags);
     }
 }

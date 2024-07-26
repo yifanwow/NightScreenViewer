@@ -8,6 +8,7 @@ namespace NightScreenViewerBackend
     class Program
     {
         private static ScreenManager screenManager = new ScreenManager();
+
         static async Task Main(string[] args)
         {
             Console.WriteLine("NightScreenViewer Backend started...");
@@ -18,7 +19,15 @@ namespace NightScreenViewerBackend
         {
             while (true)
             {
-                using (var pipeServer = new NamedPipeServerStream("NightScreenViewerPipe", PipeDirection.InOut, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous))
+                using (
+                    var pipeServer = new NamedPipeServerStream(
+                        "NightScreenViewerPipe",
+                        PipeDirection.InOut,
+                        1,
+                        PipeTransmissionMode.Message,
+                        PipeOptions.Asynchronous
+                    )
+                )
                 {
                     Console.WriteLine("Waiting for connection...");
                     await pipeServer.WaitForConnectionAsync();
@@ -51,16 +60,11 @@ namespace NightScreenViewerBackend
                     return await Task.Run(() => screenManager.StartBlackScreen());
                 case "stopBlackScreen":
                     return await Task.Run(() => screenManager.StopBlackScreen());
+                case string msg when msg.StartsWith("setOpacity:"):
+                    double opacity = double.Parse(message.Split(':')[1]) / 100.0; // Assuming the opacity value is passed as a percentage
+                    return await Task.Run(() => screenManager.SetOpacity(opacity));
                 default:
-                    if (message.StartsWith("setOpacity:"))
-                    {
-                        string opacityValue = message.Split(':')[1];
-                        return $"Opacity set to {opacityValue}%";
-                    }
-                    else
-                    {
-                        return "Unknown command";
-                    }
+                    return "Unknown command";
             }
         }
     }
