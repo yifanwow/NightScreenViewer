@@ -9,6 +9,7 @@ namespace NightScreenViewerBackend
     {
         private static Form[]? blackScreenForms; // 声明为nullable类型
         private SynchronizationContext? mainContext; // 声明为nullable类型
+        private static CancellationTokenSource? opacityCts; // 用于取消不透明度调整任务
 
         public ScreenManager()
         {
@@ -24,7 +25,7 @@ namespace NightScreenViewerBackend
             blackScreenForms = new Form[nonPrimaryScreens.Length];
             for (int i = 0; i < nonPrimaryScreens.Length; i++)
             {
-                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(nonPrimaryScreens[i], 0.01); // 初始不透明度设置为0.1
+                blackScreenForms[i] = BlackScreenForm.CreateBlackScreenForm(nonPrimaryScreens[i], 0.01); // 初始不透明度设置为0.01
                 ScreenHelper.ShowForm(blackScreenForms[i]);
             }
 
@@ -55,10 +56,23 @@ namespace NightScreenViewerBackend
         {
             if (blackScreenForms != null)
             {
+                // 取消当前的不透明度调整任务
+                if (opacityCts != null)
+                {
+                    opacityCts.Cancel();
+                    opacityCts = null;
+                }
+
+                // 创建一个新的取消令牌源
+                opacityCts = new CancellationTokenSource();
+                var token = opacityCts.Token;
+
+                // 启动新的不透明度调整任务
                 foreach (var form in blackScreenForms)
                 {
-                    FadeEffect.AdjustOpacity(form, opacity); // 调整不透明度
+                    Task.Run(() => FadeEffect.AdjustOpacityAsync(form, opacity, token), token);
                 }
+
                 return $"Opacity adjusted to {opacity * 100}%";
             }
             return "No black screens to adjust.";
