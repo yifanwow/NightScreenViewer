@@ -20,10 +20,12 @@ namespace NightScreenViewerBackend
                 TopMost = true // 窗体置顶
             };
 
-            // 在窗体加载时设置窗体为分层窗体，并设置不透明度
+            // 在窗体加载时设置窗体为分层窗体，并设置不透明度和透明点击穿透
             form.Load += (sender, e) =>
             {
-                NativeMethods.SetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE, NativeMethods.GetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE) | NativeMethods.WS_EX_LAYERED);
+                NativeMethods.SetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE,
+                    NativeMethods.GetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE) | 
+                    NativeMethods.WS_EX_LAYERED | NativeMethods.WS_EX_TRANSPARENT);
                 byte opacityByte = (byte)(opacity * 255);
                 NativeMethods.SetLayeredWindowAttributes(form.Handle, 0, opacityByte, NativeMethods.LWA_ALPHA);
             };
