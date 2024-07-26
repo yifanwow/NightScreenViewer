@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       button.classList.add('button-on');
       button.textContent = 'Auto On';
     }
-    window.electron.sendMessage(isOn ? 'autoOff' : 'autoOn');
+    window.electron.sendMessage(isOn ? 'autoOn' : 'autoOff');
   });
 
   const opacitySlider = document.getElementById('opacity');

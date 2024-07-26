@@ -10,6 +10,7 @@ namespace NightScreenViewerBackend
         private static Form[]? blackScreenForms; // 声明为nullable类型
         private SynchronizationContext? mainContext; // 声明为nullable类型
         private static CancellationTokenSource? opacityCts; // 用于取消不透明度调整任务
+        private bool isAutoModeEnabled = false;
 
         public ScreenManager()
         {
@@ -135,6 +136,30 @@ namespace NightScreenViewerBackend
             {
                 focusWatcherCts.Cancel();
                 focusWatcherCts = null;
+            }
+        }
+
+        public void EnableAutoMode()
+        {
+            if (!isAutoModeEnabled)
+            {
+                isAutoModeEnabled = true;
+                FullscreenDetector.StartDetection(
+                    () => { Console.WriteLine("full screen."); },
+                    () =>  { Console.WriteLine("exit full screen."); }
+                );
+                Console.WriteLine("Auto mode enabled.");
+            }
+        }
+
+        public void DisableAutoMode()
+        {
+            if (isAutoModeEnabled)
+            {
+                isAutoModeEnabled = false;
+                FullscreenDetector.StopDetection();
+                StopBlackScreen();
+                Console.WriteLine("Auto mode disabled.");
             }
         }
     }

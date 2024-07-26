@@ -53,8 +53,10 @@ namespace NightScreenViewerBackend
             switch (message)
             {
                 case "autoOn":
+                    screenManager.EnableAutoMode();
                     return "Auto On enabled";
                 case "autoOff":
+                    screenManager.DisableAutoMode();
                     return "Auto Off disabled";
                 case "startBlackScreen":
                     return await Task.Run(() => screenManager.StartBlackScreen());
