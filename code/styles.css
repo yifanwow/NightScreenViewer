@@ -134,7 +134,7 @@ input:checked + .slider:before {
 .input-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content:center;
   width: 100%;
 }
 
@@ -162,8 +162,9 @@ input[type=range]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #3498db;
+  background: #cb58e7;
   cursor: pointer;
+  filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.3));
 }
 
 input[type=range]::-moz-range-thumb {
@@ -181,3 +182,24 @@ label {
   color: #9c9c9c;
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }
+
+.button1 a{  
+   transition: transform 0.37s ease-in-out, color 0.7s ease;
+}
+
+.button1 svg{
+  color: #949494;
+  margin-top: 3px;
+  width: 30px;
+  height: 30px;
+  transition: fill 0.7s ease;
+  filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
+  transition: transform 0.37s ease-in-out, color 0.7s ease;
+  /* 应用阴影效果 */
+}
+
+.button1 svg:hover{
+  transform: scale(1.1);
+  color: #b07df1;
+}
+

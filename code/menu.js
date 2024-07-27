@@ -3,15 +3,28 @@ const { Menu, shell, app } = require('electron');
 function createMenu(mainWindow) {
   const menuTemplate = [
     {
-      label: 'Setting',
+      label: 'Main Page  |',
+      click: () => {
+        mainWindow.loadFile('index.html');
+      }
+    },
+    {
+      label: 'Setting  |',
       click: () => {
         mainWindow.loadFile('settings.html');
       }
     },
     {
-      label: 'Document',
+      label: 'Document  |',
       click: async () => {
         await shell.openExternal('https://github.com/yifanwow/NightScreenViewer');
+      }
+    },
+    {
+      label: 'Author  |',
+      click: async () => {
+        await shell.openExternal('https://yifanovo.info');
+        mainWindow.loadFile('author.html');
       }
     },
     { type: 'separator' },
