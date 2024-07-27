@@ -33,6 +33,7 @@ Users can customize the opacity of the darkening overlay on the secondary screen
 - Automatically enable blackout mode when in fullscreen √
 - Exit blackout mode when exiting fullscreen or when the focused software is not in fullscreen √
 - Manually turning off or on blackout mode will disable automatic mode to prevent logical conflicts √
+- UI optimization: button update, different color distinction for slider √
 
 ### Over All Development
 
