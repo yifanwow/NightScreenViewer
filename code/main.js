@@ -11,7 +11,7 @@ let client = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 700,
+    width: 770,
     height: 500,
     minWidth: 350,
     minHeight: 250,

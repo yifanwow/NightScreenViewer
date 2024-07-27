@@ -55,7 +55,7 @@ namespace NightScreenViewerBackend
                     }
 
                     wasFullscreen = isFullscreen;
-                    await Task.Delay(3000); // 检测间隔
+                    await Task.Delay(1700); // 检测间隔
                 }
             }, token);
         }

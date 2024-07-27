@@ -70,9 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
     window.electron.sendMessage(`setOpacity:${value}`);
   }, 520); // 0.52秒钟防抖时间
 
+  function updateRangeBackground(value) {
+    const percentage = value + '%';
+    opacitySlider.style.background = `linear-gradient(to right, #5d4164 ${percentage}, #b9b9b9 ${percentage})`;
+  }
+
   opacitySlider.oninput = function () {
     opacityValue.textContent = `${this.value}%`;
     updateOpacity(this.value); // 调用防抖函数
+    updateRangeBackground(this.value);
   };
 
   document.getElementById("decrease").addEventListener("click", () => {
@@ -131,4 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.electron.sendMessage("stopBlackScreen");
     }
   });
+
+  // 初始化滑块背景
+  updateRangeBackground(opacitySlider.value);
 });
