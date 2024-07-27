@@ -28,11 +28,17 @@ Users can customize the opacity of the darkening overlay on the secondary screen
 - When users focus on other windows, the focused window is brought to the front even if the overlay is enabled, improving user experience √
 - The backend can detect if the currently focused window is on the primary screen and update whether the overlay window is at the forefront √
 
+#### *Version - 0.1.7.27.24*
+- Implemented automatic fullscreen detection √
+- Automatically enable blackout mode when in fullscreen √
+- Exit blackout mode when exiting fullscreen or when the focused software is not in fullscreen √
+- Manually turning off or on blackout mode will disable automatic mode to prevent logical conflicts √
+
 ### Over All Development
 
 1. **Phase 1: Setup and Initial Testing**
    - Set up the project repository and basic project structure. √ 7.25
-   - Implement core functionality to detect full-screen applications.
+   - Implement core functionality to detect full-screen applications.  √ 7.27
    - Create a basic overlay window that can cover secondary screens. √ 7.26
    - Implement system tray integration for easy access and adjustments. √ 7.25
 
