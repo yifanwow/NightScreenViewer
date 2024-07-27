@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const app = document.getElementById('app');
+document.addEventListener("DOMContentLoaded", () => {
+  const app = document.getElementById("app");
 
   app.innerHTML = `
     <div class="container">
@@ -20,28 +20,28 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   `;
 
-  document.getElementById('autoOn').addEventListener('click', function() {
+  document.getElementById("autoOn").addEventListener("click", function () {
     const button = this;
-    const isOn = button.classList.contains('button-on');
+    const isOn = button.classList.contains("button-on");
     if (isOn) {
-      button.classList.remove('button-on');
-      button.classList.add('button-off');
-      button.textContent = 'Auto Off';
+      button.classList.remove("button-on");
+      button.classList.add("button-off");
+      button.textContent = "Auto Off";
     } else {
-      button.classList.remove('button-off');
-      button.classList.add('button-on');
-      button.textContent = 'Auto On';
+      button.classList.remove("button-off");
+      button.classList.add("button-on");
+      button.textContent = "Auto On";
     }
-    window.electron.sendMessage(isOn ? 'autoOn' : 'autoOff');
+    window.electron.sendMessage(isOn ? "autoOn" : "autoOff");
   });
 
-  const opacitySlider = document.getElementById('opacity');
-  const opacityValue = document.getElementById('opacityValue');
+  const opacitySlider = document.getElementById("opacity");
+  const opacityValue = document.getElementById("opacityValue");
 
   // 防抖函数
   function debounce(func, wait) {
     let timeout;
-    return function(...args) {
+    return function (...args) {
       const context = this;
       clearTimeout(timeout);
       timeout = setTimeout(() => func.apply(context, args), wait);
@@ -53,47 +53,65 @@ document.addEventListener('DOMContentLoaded', () => {
     window.electron.sendMessage(`setOpacity:${value}`);
   }, 520); // 0.52秒钟防抖时间
 
-  opacitySlider.oninput = function() {
+  opacitySlider.oninput = function () {
     opacityValue.textContent = `${this.value}%`;
     updateOpacity(this.value); // 调用防抖函数
   };
 
-  document.getElementById('decrease').addEventListener('click', () => {
+  document.getElementById("decrease").addEventListener("click", () => {
     let newValue = parseInt(opacitySlider.value) - 5;
     if (newValue < 0) newValue = 0;
     opacitySlider.value = newValue;
     opacitySlider.oninput();
   });
 
-  document.getElementById('increase').addEventListener('click', () => {
+  document.getElementById("increase").addEventListener("click", () => {
     let newValue = parseInt(opacitySlider.value) + 5;
     if (newValue > 100) newValue = 100;
     opacitySlider.value = newValue;
     opacitySlider.oninput();
   });
 
-  document.getElementById('toggle').addEventListener('change', function() {
+  document.getElementById("toggle").addEventListener("change", function () {
     const isChecked = this.checked;
-    window.electron.sendMessage(isChecked ? 'startBlackScreen' : 'stopBlackScreen');
 
-    // 当用户发送startBlackScreen后的一秒钟，同步发送一个更新不透明度的请求
-    if (isChecked) {
-      setTimeout(() => {
-        const currentOpacity = opacitySlider.value;
-        window.electron.sendMessage(`setOpacity:${currentOpacity}`);
-      }, 1000); // 一秒钟延时
-    }
+    window.electron
+      .sendMessage("autoOff")
+      .then(() => {
+        const autoOnButton = document.getElementById("autoOn");
+        autoOnButton.classList.remove("button-off");
+        autoOnButton.classList.add("button-on");
+        autoOnButton.textContent = "Auto On";
+
+        return window.electron.sendMessage(
+          isChecked ? "startBlackScreen" : "stopBlackScreen"
+        );
+      })
+      .then(() => {
+        if (isChecked) {
+          setTimeout(() => {
+            const currentOpacity = opacitySlider.value;
+            window.electron.sendMessage(`setOpacity:${currentOpacity}`);
+          }, 1000); // 一秒钟延时
+        }
+      });
   });
 
   window.electron.receiveMessage((data) => {
-    console.log('Message from REC:', data);
-    const toggle = document.getElementById('toggle');
-    if (data === 'fullscreen.') {
-      toggle.checked = true;
-      toggle.dispatchEvent(new Event('change'));
-    } else if (data === 'exitfullscreen.') {
+    console.log("Message from REC:", data);
+    const toggle = document.getElementById("toggle");
+    if (data === "fullscreen.") {
+      if (!toggle.checked) {//如果还没开启黑屏则开启，如果已经开启黑屏就忽略。
+        window.electron.sendMessage("startBlackScreen");
+        setTimeout(() => {
+          const currentOpacity = opacitySlider.value;
+          window.electron.sendMessage(`setOpacity:${currentOpacity}`);
+        }, 1000); // 一秒钟延时
+        toggle.checked = true;
+      }
+    } else if (data === "exitfullscreen.") {
       toggle.checked = false;
-      toggle.dispatchEvent(new Event('change'));
+      window.electron.sendMessage("stopBlackScreen");
     }
   });
 });

@@ -45,6 +45,7 @@ function createWindow() {
     if (client) {
       client.write(message + '\n');
     }
+    event.reply('message-received');
   });
 
   ipcMain.on('go-back', () => {

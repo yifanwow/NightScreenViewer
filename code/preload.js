@@ -1,10 +1,12 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron/renderer');
 
 contextBridge.exposeInMainWorld('electron', {
-  sendMessage: (message) => ipcRenderer.send('message', message),
-  receiveMessage: (callback) => ipcRenderer.on('backend-message', (event, data) => {
-    console.log('PRELOAD: Received message from main process:', data); // 确认消息接收
-    callback(data);
-  }),
+  sendMessage: (message) => {
+    return new Promise((resolve) => {
+      ipcRenderer.once('message-received', () => resolve());
+      ipcRenderer.send('message', message);
+    });
+  },
+  receiveMessage: (callback) => ipcRenderer.on('backend-message', (_event, data) => callback(data)),
   goBack: () => ipcRenderer.send('go-back')
 });
