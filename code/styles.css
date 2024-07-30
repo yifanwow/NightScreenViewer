@@ -49,7 +49,8 @@ h1 {
 .toggle-container {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  margin-left: 9px;
   
 }
 
@@ -116,18 +117,18 @@ input:checked + .slider:before {
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
   box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.314);
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s ease-in-out;
+  transition: background-color 0.7s, transform 0.3s ease-in-out;
 }
 
 .button-on {
-  background-color: #3b6d5e;
+  background-color: #3b7a8d;
   font-size: 1.0rem;
   font-weight: 200;
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }
 
 .button-off {
-  background-color: #684b47;
+  background-color: #7a436d;
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }
 
@@ -144,20 +145,20 @@ input:checked + .slider:before {
 
 input[type=range] {
   width: 60%;
-  margin: 20px 10px;
+  margin: 0px 15px;
   -webkit-appearance: none;
   appearance: none;
   height: 8px;
   border-radius: 5px;
-  background: linear-gradient(to right, #c144e0 50%, #b9b9b9 50%);
+  background: linear-gradient(to right, #663572 50%, #b9b9b9 50%);
   outline: none;
   opacity: 0.7;
-  transition: opacity 0.2s, transform 0.7s ease-out, background 0.3s;
+  transition: opacity 0.5s, transform 0.7s ease-out, background 0.3s;
 }
 
 input[type=range]:hover {
   opacity: 1;
-  transform: scale(1.07);
+  transform: scale(1.09);
 }
 
 input[type=range]::-webkit-slider-runnable-track {
@@ -181,7 +182,7 @@ input[type=range]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #9c42b3;
+  background: #c65eca;
   cursor: pointer;
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.3));
 }
@@ -190,7 +191,7 @@ input[type=range]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #c144e0;
+  background: #8844e0;
   cursor: pointer;
 }
 
@@ -208,16 +209,18 @@ label {
 
 .button1 svg{
   color: #949494;
-  margin-top: 3px;
+  margin-top: 5px;
   width: 30px;
   height: 30px;
   transition: fill 0.7s ease;
+  opacity: 0.7;
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
-  transition: transform 0.37s ease-in-out, color 0.7s ease;
+  transition: opacity 0.5s, transform 0.7s ease-in-out, color 0.7s ease;
   /* 应用阴影效果 */
 }
 
 .button1 svg:hover{
-  transform: scale(1.1);
-  color: #b07df1;
+  transform: scale(1.19);
+  opacity: 1;
+  color: #d581e0;
 }

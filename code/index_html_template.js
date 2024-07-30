@@ -5,11 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="container">
       <h1>Night Screen Viewer</h1>
       <div class="toggle-container">
-        <label class="switch">
-          <input type="checkbox" id="toggle">
-          <span class="slider round"></span>
-        </label>
+         <div class="checkbox-wrapper-5">
+          <div class="check">
+            <input id="toggle" type="checkbox">
+            <label for="toggle"></label>
+          </div>
+        </div>
         <button id="autoOn" class="button button-on">Auto On</button>
+        
       </div>
       <div class="input-container">
         <button1 id="decrease" class="button1">
