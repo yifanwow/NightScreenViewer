@@ -1,4 +1,8 @@
 body {
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* Internet Explorer/Edge */
+  user-select: none;          /* 非前缀的版本，支持较新的浏览器 */
   font-family: 'PingFang SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #1e272e;
   background-image: url('./IMG/image.png');
