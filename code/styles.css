@@ -49,7 +49,7 @@ h1 {
 .toggle-container {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 3px;
   margin-left: 9px;
   
 }
@@ -121,14 +121,14 @@ input:checked + .slider:before {
 }
 
 .button-on {
-  background-color: #3b7a8d;
+  background-color: #4094cc;
   font-size: 1.0rem;
   font-weight: 200;
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }
 
 .button-off {
-  background-color: #7a436d;
+  background-color: #ab64b9;
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.514);
 }
 
@@ -223,4 +223,13 @@ label {
   transform: scale(1.19);
   opacity: 1;
   color: #d581e0;
+}
+
+.bottom-right-logo {
+  position: fixed;
+  right: 2vh;
+  bottom: 1vh;
+  width: auto; /* Adjust the size as needed */
+  height: 35vh;
+  opacity: 0.7;
 }

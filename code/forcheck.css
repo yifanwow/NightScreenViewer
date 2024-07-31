@@ -5,7 +5,7 @@
   display: inline-block;
   margin-top: 5px;
   margin-right: 30px;
-    background: linear-gradient(90deg, #803281, #f099b5);
+    background: linear-gradient(90deg, #803281, #c699f0);
     line-height: 0;
     perspective: 400px;
     
@@ -95,7 +95,7 @@
   .checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::after {
     height: calc(.16 * var(--size));
     top: calc(.55 * var(--size));
-    left: calc(1.5 * var(--size));
+    left: calc(1.47 * var(--size));
     font-size: calc(.6 * var(--size));
     line-height: 0;
   }

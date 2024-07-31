@@ -12,8 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
         <button id="autoOn" class="button button-on">Auto On</button>
-        
       </div>
+      <div class="radio-wrapper-15">
+  </div>
+<div class="checkbox-wrapper-47">
+  <input type="checkbox" name="cb" id="cb-47" />
+  <label for="cb-47">Mirror Mode</label>
+</div>
+
       <div class="input-container">
         <button1 id="decrease" class="button1">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         </button1>
       </div>
       <label for="opacity">Opacity: <span id="opacityValue">50%</span></label>
+      
     </div>
+    <img src="./IMG/logo/nsv_logo_img.png" class="bottom-right-logo">
   `;
 });
