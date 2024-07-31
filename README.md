@@ -10,6 +10,7 @@ Users can customize the opacity of the darkening overlay on the secondary screen
 
 - **Automatic Detection**: Automatically detects when a specified application goes into full-screen mode on the primary monitor.
 - **Adjustable Opacity**: Users can adjust the opacity of the dark overlay applied to secondary screens to ensure comfort and visibility according to their preferences.
+- **Automatic Switch Overlay Level**: In overlay mode, if the user focuses on a software interface that is beneath the overlay, the priority will be automatically adjusted; when the user's focus returns to the primary screen, the overlay's level will be adjusted to the forefront.  
 - **Best user experience**: Always trying to do better.
 
 ![website image](./img/nsv.png) 
