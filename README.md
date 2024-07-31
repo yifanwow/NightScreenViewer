@@ -35,6 +35,10 @@ Users can customize the opacity of the darkening overlay on the secondary screen
 - Manually turning off or on blackout mode will disable automatic mode to prevent logical conflicts √
 - UI optimization: button update, different color distinction for slider √
 
+#### *Version - 0.1.7.31.24*
+- Added frontend components for mirror mode √
+- UI Optimization: Redesigned buttons, frontend update √
+
 ### Over All Development
 
 1. **Phase 1: Setup and Initial Testing**
@@ -47,6 +51,7 @@ Users can customize the opacity of the darkening overlay on the secondary screen
    - Develop the feature to adjust the opacity of the overlay. √ 7.26
    - ~~Implement the functionality to manage a list of applications that will trigger the overlay.~~(Development is on hold, it's not a very high priority, it feels less practical in real life experience, and it can be completely replaced by auto mode.) 7.29
    - ~~Hot-key function.~~(Development is on hold, it's not a very high priority, it feels less practical in real life experience, and it can be completely replaced by auto mode.) 7.29
+   - Mirror Mode.
 
 3. **Phase 3: GUI Development**
    - Design and implement a graphical user interface that allows users to easily configure the application settings.
