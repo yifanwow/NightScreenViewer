@@ -153,7 +153,7 @@ input[type=range] {
   background: linear-gradient(to right, #663572 50%, #b9b9b9 50%);
   outline: none;
   opacity: 0.7;
-  transition: opacity 0.5s, transform 0.7s ease-out, background 0.3s;
+  transition: 0.7s all ease;
 }
 
 input[type=range]:hover {
@@ -166,6 +166,7 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 8px;
   border-radius: 5px;
   background: transparent;
+  transition: 0.7s all ease;
 }
 
 input[type=range]::-moz-range-track {
@@ -173,6 +174,7 @@ input[type=range]::-moz-range-track {
   height: 8px;
   border-radius: 5px;
   background: transparent;
+  transition: 0.7s all ease;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -185,6 +187,7 @@ input[type=range]::-webkit-slider-thumb {
   background: #c65eca;
   cursor: pointer;
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.3));
+  transition: 0.7s all ease;
 }
 
 input[type=range]::-moz-range-thumb {
@@ -193,6 +196,7 @@ input[type=range]::-moz-range-thumb {
   border-radius: 50%;
   background: #8844e0;
   cursor: pointer;
+  transition: 0.7s all ease;
 }
 
 label {
@@ -209,6 +213,7 @@ label {
 
 .button1 svg{
   color: #949494;
+  background: none;
   margin-top: 5px;
   width: 30px;
   height: 30px;
@@ -232,4 +237,10 @@ label {
   width: auto; /* Adjust the size as needed */
   height: 35vh;
   opacity: 0.7;
+}
+
+.disabled {
+  opacity: 0.5;  /* 使元素变灰 */
+  pointer-events: none;  /* 禁用所有鼠标事件 */
+  transition: opacity 0.5s;
 }

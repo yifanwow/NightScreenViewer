@@ -12,6 +12,7 @@ Users can customize the opacity of the darkening overlay on the secondary screen
 - **Adjustable Opacity**: Users can adjust the opacity of the dark overlay applied to secondary screens to ensure comfort and visibility according to their preferences.
 - **Automatic Switch Overlay Level**: In overlay mode, if the user focuses on a software interface that is beneath the overlay, the priority will be automatically adjusted; when the user's focus returns to the primary screen, the overlay's level will be adjusted to the forefront.  
 - **Best user experience**: Always trying to do better.
+- **Mirror Mode**：When the user is in immersion mode, the system will capture the screen on the primary monitor in real-time and replace the overlays on the displays on the left and right sides of the primary screen with a blurred version of the captured image. This creates a simulated ambient lighting effect. Additionally, the frontend will not allow the user to change the opacity until immersion mode is disabled.  
 
 ![website image](./img/nsv.png) 
 
