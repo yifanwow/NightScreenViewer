@@ -1,78 +1,78 @@
 ﻿using System;
-using System.IO;
-using System.IO.Pipes;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace NightScreenViewerBackend
 {
-    class Program
+    public static class MirrorMode
     {
-        private static ScreenManager screenManager = new ScreenManager();
+        private static bool isMirrorModeEnabled = false;
 
-        static async Task Main(string[] args)
+        public static async Task<string> CheckAndEnableMirrorModeAsync()
         {
-            Console.WriteLine("NightScreenViewer Backend started...");
-            await ListenForMessages();
-        }
+            var screens = Screen.AllScreens;
 
-        static async Task ListenForMessages()
-        {
-            while (true)
+            if (screens.Length >= 3)
             {
-                using (
-                    var pipeServer = new NamedPipeServerStream(
-                        "NightScreenViewerPipe",
-                        PipeDirection.InOut,
-                        1,
-                        PipeTransmissionMode.Message,
-                        PipeOptions.Asynchronous
-                    )
-                )
-                {
-                    Console.WriteLine("Waiting for connection...");
-                    await pipeServer.WaitForConnectionAsync();
-                    Console.WriteLine("Client connected.");
-
-                    using (var reader = new StreamReader(pipeServer))
-                    using (var writer = new StreamWriter(pipeServer) { AutoFlush = true })
-                    {
-                        string message;
-                        while ((message = await reader.ReadLineAsync()) != null)
-                        {
-                            Console.WriteLine($"Received message: {message}");
-                            string response = await ProcessMessageAsync(message);
-                            await writer.WriteLineAsync(response);
-                        }
-                    }
-                }
+                EnableMirrorMode();
+                return "Mirror mode enabled, screen count: " + screens.Length;
+            }
+            else
+            {
+                DisableMirrorMode();
+                return "Mirror mode disabled, screen count: " + screens.Length;
             }
         }
 
-        static async Task<string> ProcessMessageAsync(string message)
+        public static void EnableMirrorMode()
         {
-            switch (message)
-            {
-                case "autoOn":
-                    screenManager.EnableAutoMode();
-                    return "Auto On enabled";
-                case "autoOff":
-                    screenManager.DisableAutoMode();
-                    return "Auto Off disabled";
-                case "startBlackScreen":
-                    return await Task.Run(() => screenManager.StartBlackScreen());
-                case "stopBlackScreen":
-                    return await Task.Run(() => screenManager.StopBlackScreen());
-                case string msg when msg.StartsWith("setOpacity:"):
-                    double opacity = double.Parse(message.Split(':')[1]) / 100.0; // Assuming the opacity value is passed as a percentage
-                    return await Task.Run(() => screenManager.SetOpacity(opacity));
-                case "mirrorModeOn":
-                    return "Mirror mode enabled";
-                case "mirrorModeOff":
-                    return "Mirror mode disabled";
+            isMirrorModeEnabled = true;
+            Console.WriteLine("Mirror mode enabled.");
+        }
 
-                default:
-                    return "Unknown command";
-            }
+        public static void DisableMirrorMode()
+        {
+            isMirrorModeEnabled = false;
+            Console.WriteLine("Mirror mode disabled.");
+        }
+
+        public static void DisplayLabelOnScreen(Screen screen, string label)
+        {
+            var form = new Form
+            {
+                FormBorderStyle = FormBorderStyle.None,
+                Bounds = screen.Bounds,
+                BackColor = Color.Black,
+                StartPosition = FormStartPosition.Manual,
+                ShowInTaskbar = false,
+                TopMost = true
+            };
+
+            var labelControl = new Label
+            {
+                Text = label,
+                Font = new Font("Arial", 48, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = Color.Transparent,
+                AutoSize = true,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
+            form.Controls.Add(labelControl);
+            form.Shown += (sender, args) =>
+            {
+                labelControl.Location = new Point(
+                    form.ClientSize.Width / 2 - labelControl.Size.Width / 2,
+                    form.ClientSize.Height / 2 - labelControl.Size.Height / 2
+                );
+            };
+
+            Application.Run(form);
+        }
+
+        public static bool IsMirrorModeEnabled()
+        {
+            return isMirrorModeEnabled;
         }
     }
 }

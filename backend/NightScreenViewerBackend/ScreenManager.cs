@@ -35,6 +35,13 @@ namespace NightScreenViewerBackend
                     0.01
                 ); // 初始不透明度设置为0.01
                 ScreenHelper.ShowForm(blackScreenForms[i]);
+
+                if (MirrorMode.IsMirrorModeEnabled())
+                {
+                    var screen = nonPrimaryScreens[i];
+                    string label = screen.Bounds.Left < mainScreen.Bounds.Left ? "L" : "R";
+                    Task.Run(() => MirrorMode.DisplayLabelOnScreen(screen, label));
+                }
             }
 
             // 启动焦点变化检测
@@ -175,7 +182,5 @@ namespace NightScreenViewerBackend
                 Console.WriteLine("Auto mode disabled.");
             }
         }
-
-        
     }
 }
