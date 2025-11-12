@@ -124,11 +124,37 @@ Users can customize the opacity of the darkening overlay on the secondary screen
 
 有关如何安装和配置 NightScreenViewer 的说明将在第一个稳定版本发布时提供。
 
+### 启动步骤
+#### 后端：
+```bash
+dotnet build
+dotnet run
+```
 
+#### 前端：
+```bash
+npm install
+npm start
+```
 
 ## Installation
 
 Instructions on how to install and configure NightScreenViewer will be provided with the first stable release.
+
+
+### How to run it
+#### Backend：
+```bash
+dotnet build
+dotnet run
+```
+
+#### Frontend：
+```bash
+npm install
+npm start
+```
+
 ## 计划功能
 
 - 可配置的触发调暗的应用程序列表。
@@ -136,6 +162,7 @@ Instructions on how to install and configure NightScreenViewer will be provided 
 - 用户友好的 GUI，便于配置设置。
 - 开启和关闭功能的快捷键。
 - 状态变化时的动画效果。
+
 ## Planned Features
 
 - Configurable list of applications that trigger the dimming.
