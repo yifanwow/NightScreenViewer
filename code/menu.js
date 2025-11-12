@@ -15,16 +15,16 @@ function createMenu(mainWindow) {
       }
     },
     {
-      label: 'Document  |',
+      label: 'Author  |',
       click: async () => {
-        await shell.openExternal('https://github.com/yifanwow/NightScreenViewer');
+        await shell.openExternal('https://yifanovo.com');
+        mainWindow.loadFile('author.html');
       }
     },
     {
-      label: 'Author  |',
+      label: 'Document  |',
       click: async () => {
-        await shell.openExternal('https://yifanovo.info');
-        mainWindow.loadFile('author.html');
+        await shell.openExternal('https://github.com/yifanwow/NightScreenViewer');
       }
     },
     { type: 'separator' },
