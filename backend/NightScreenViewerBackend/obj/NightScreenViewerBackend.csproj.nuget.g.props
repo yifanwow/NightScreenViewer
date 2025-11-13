@@ -12,4 +12,8 @@
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\yifan\.nuget\packages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)vortice.dxgi\2.4.2\build\Vortice.DXGI.props" Condition="Exists('$(NuGetPackageRoot)vortice.dxgi\2.4.2\build\Vortice.DXGI.props')" />
+    <Import Project="$(NuGetPackageRoot)vortice.direct3d11\2.4.2\build\Vortice.Direct3D11.props" Condition="Exists('$(NuGetPackageRoot)vortice.direct3d11\2.4.2\build\Vortice.Direct3D11.props')" />
+  </ImportGroup>
 </Project>

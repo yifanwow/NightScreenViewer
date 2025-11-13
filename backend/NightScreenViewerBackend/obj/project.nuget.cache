@@ -1,13 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "TN0vgBkwCDJUBeLzNvRsom7DCxAlF9+3MYntZ74VT/dPSJJI/xIUJilauEVBZGh4MzB2IsRYoXNll9Aa4k5Ecw==",
+  "dgSpecHash": "DxWgdrHjY6rzcVuc3f5NJW+ZwyHQxB2DYkYJipER+gMyRADmuh9u+7bZEPXBKzjbg6wY4hLxVpsgMcwnbZggJA==",
   "success": true,
   "projectFilePath": "F:\\Program\\Github-Project-Local\\NightScreenViewer\\NightScreenViewer\\backend\\NightScreenViewerBackend\\NightScreenViewerBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yifan\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\yifan\\.nuget\\packages\\polysharp\\1.10.0\\polysharp.1.10.0.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\yifan\\.nuget\\packages\\sharpgen.runtime\\2.0.0-beta.13\\sharpgen.runtime.2.0.0-beta.13.nupkg.sha512",
+    "C:\\Users\\yifan\\.nuget\\packages\\sharpgen.runtime.com\\2.0.0-beta.13\\sharpgen.runtime.com.2.0.0-beta.13.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
@@ -29,7 +32,11 @@
     "C:\\Users\\yifan\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\yifan\\.nuget\\packages\\system.threading.overlapped\\4.3.0\\system.threading.overlapped.4.3.0.nupkg.sha512",
-    "C:\\Users\\yifan\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
+    "C:\\Users\\yifan\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\yifan\\.nuget\\packages\\vortice.direct3d11\\2.4.2\\vortice.direct3d11.2.4.2.nupkg.sha512",
+    "C:\\Users\\yifan\\.nuget\\packages\\vortice.directx\\2.4.2\\vortice.directx.2.4.2.nupkg.sha512",
+    "C:\\Users\\yifan\\.nuget\\packages\\vortice.dxgi\\2.4.2\\vortice.dxgi.2.4.2.nupkg.sha512",
+    "C:\\Users\\yifan\\.nuget\\packages\\vortice.mathematics\\1.4.25\\vortice.mathematics.1.4.25.nupkg.sha512"
   ],
   "logs": []
 }

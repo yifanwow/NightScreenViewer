@@ -13,7 +13,11 @@ namespace NightScreenViewerBackend
         public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern int GetWindowText(IntPtr hWnd, System.Text.StringBuilder lpString, int nMaxCount);
+        public static extern int GetWindowText(
+            IntPtr hWnd,
+            System.Text.StringBuilder lpString,
+            int nMaxCount
+        );
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int GetWindowTextLength(IntPtr hWnd);
@@ -53,10 +57,14 @@ namespace NightScreenViewerBackend
             {
                 foreach (var screen in Screen.AllScreens)
                 {
-                    if (screen.Bounds.Left == monitorInfo.rcMonitor.Left &&
-                        screen.Bounds.Top == monitorInfo.rcMonitor.Top &&
-                        screen.Bounds.Width == (monitorInfo.rcMonitor.Right - monitorInfo.rcMonitor.Left) &&
-                        screen.Bounds.Height == (monitorInfo.rcMonitor.Bottom - monitorInfo.rcMonitor.Top))
+                    if (
+                        screen.Bounds.Left == monitorInfo.rcMonitor.Left
+                        && screen.Bounds.Top == monitorInfo.rcMonitor.Top
+                        && screen.Bounds.Width
+                            == (monitorInfo.rcMonitor.Right - monitorInfo.rcMonitor.Left)
+                        && screen.Bounds.Height
+                            == (monitorInfo.rcMonitor.Bottom - monitorInfo.rcMonitor.Top)
+                    )
                     {
                         return screen;
                     }
@@ -72,7 +80,9 @@ namespace NightScreenViewerBackend
             bool isOnPrimaryScreen = screen.Primary;
 
             // 输出调试信息到控制台
-            Console.WriteLine($"Foreground Window: {foregroundWindow}, Screen: {screen.DeviceName}, On Primary: {isOnPrimaryScreen}");
+            Console.WriteLine(
+                $"Foreground Window: {foregroundWindow}, Screen: {screen.DeviceName}, On Primary: {isOnPrimaryScreen}"
+            );
 
             return isOnPrimaryScreen;
         }

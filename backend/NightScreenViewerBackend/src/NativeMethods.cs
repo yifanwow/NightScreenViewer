@@ -17,6 +17,11 @@ namespace NightScreenViewerBackend
         public static extern int GetWindowLong(IntPtr hWnd, int nIndex); // 获取窗体长整数值
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags); // 设置分层窗体属性
+        public static extern bool SetLayeredWindowAttributes(
+            IntPtr hwnd,
+            uint crKey,
+            byte bAlpha,
+            uint dwFlags
+        ); // 设置分层窗体属性
     }
 }

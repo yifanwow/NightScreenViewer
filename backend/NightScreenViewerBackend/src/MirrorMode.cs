@@ -43,6 +43,7 @@ namespace NightScreenViewerBackend
                 FormBorderStyle = FormBorderStyle.None,
                 Bounds = screen.Bounds,
                 BackColor = Color.Black,
+                TransparencyKey = Color.Black, // 使该颜色完全透明
                 StartPosition = FormStartPosition.Manual,
                 ShowInTaskbar = false,
                 TopMost = true
@@ -59,12 +60,19 @@ namespace NightScreenViewerBackend
             };
 
             form.Controls.Add(labelControl);
-            form.Shown += (sender, args) =>
+            form.Shown += async (sender, args) =>
             {
                 labelControl.Location = new Point(
                     form.ClientSize.Width / 2 - labelControl.Size.Width / 2,
                     form.ClientSize.Height / 2 - labelControl.Size.Height / 2
                 );
+
+                // 5秒后自动关闭
+                await Task.Delay(5000);
+                if (!form.IsDisposed)
+                {
+                    form.Invoke(new Action(() => form.Close()));
+                }
             };
 
             Application.Run(form);

@@ -13,10 +13,13 @@ namespace NightScreenViewerBackend
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
+
         [DllImport("user32.dll")]
         private static extern IntPtr GetDesktopWindow();
+
         [DllImport("user32.dll")]
         private static extern IntPtr GetShellWindow();
+
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowRect(IntPtr hwnd, out RECT rc);
 
@@ -37,27 +40,30 @@ namespace NightScreenViewerBackend
             cts = new CancellationTokenSource();
             var token = cts.Token;
 
-            detectionTask = Task.Run(async () =>
-            {
-                bool wasFullscreen = false;
-
-                while (!token.IsCancellationRequested)
+            detectionTask = Task.Run(
+                async () =>
                 {
-                    bool isFullscreen = AreApplicationFullScreen();
+                    bool wasFullscreen = false;
 
-                    if (isFullscreen)
+                    while (!token.IsCancellationRequested)
                     {
-                        onEnterFullscreen();
-                    }
-                    else if (!isFullscreen)
-                    {
-                        onExitFullscreen();
-                    }
+                        bool isFullscreen = AreApplicationFullScreen();
 
-                    wasFullscreen = isFullscreen;
-                    await Task.Delay(1700); // 检测间隔
-                }
-            }, token);
+                        if (isFullscreen)
+                        {
+                            onEnterFullscreen();
+                        }
+                        else if (!isFullscreen)
+                        {
+                            onExitFullscreen();
+                        }
+
+                        wasFullscreen = isFullscreen;
+                        await Task.Delay(1700); // 检测间隔
+                    }
+                },
+                token
+            );
         }
 
         public static void StopDetection()
@@ -72,15 +78,17 @@ namespace NightScreenViewerBackend
         public static bool AreApplicationFullScreen()
         {
             IntPtr hWnd = GetForegroundWindow();
-            if (hWnd == IntPtr.Zero) return false;
+            if (hWnd == IntPtr.Zero)
+                return false;
 
-            if (hWnd == desktopHandle || hWnd == shellHandle) return false;
+            if (hWnd == desktopHandle || hWnd == shellHandle)
+                return false;
 
             GetWindowRect(hWnd, out RECT appBounds);
             var screenBounds = Screen.FromHandle(hWnd).Bounds;
 
-            return (appBounds.Bottom - appBounds.Top) == screenBounds.Height &&
-                   (appBounds.Right - appBounds.Left) == screenBounds.Width;
+            return (appBounds.Bottom - appBounds.Top) == screenBounds.Height
+                && (appBounds.Right - appBounds.Left) == screenBounds.Width;
         }
     }
 }

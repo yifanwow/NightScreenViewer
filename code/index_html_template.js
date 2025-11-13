@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <div class="radio-wrapper-15">
   </div>
+
+<div class="checkbox-wrapper-47">
+  <input type="checkbox" name="cb" id="cb-theater" />
+  <label for="cb-theater">Theater Mode</label>
+</div>
 <div class="checkbox-wrapper-47">
   <input type="checkbox" name="cb" id="cb-47" />
   <label for="cb-47">Mirror Mode</label>

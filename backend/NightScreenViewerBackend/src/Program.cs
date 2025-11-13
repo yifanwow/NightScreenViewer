@@ -70,6 +70,12 @@ namespace NightScreenViewerBackend
                 case "mirrorModeOff":
                     MirrorMode.DisableMirrorMode();
                     return "Mirror mode disabled";
+                case "theaterOn":
+                    TheaterMode.Enable();
+                    return "Theater Mode enabled";
+                case "theaterOff":
+                    TheaterMode.Disable();
+                    return "Theater Mode disabled";
                 default:
                     return "Unknown command";
             }
